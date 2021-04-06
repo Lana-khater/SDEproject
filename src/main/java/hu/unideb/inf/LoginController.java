@@ -16,25 +16,26 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 
 public class LoginController implements Initializable {
+
  //buttons, images, and message label
     @FXML //username
     private TextField usernameText;
     @FXML //password
-    private PasswordField passwordText;
-    @FXML
+    private TextField phoneNumber;
+    @FXML//left Picture
     private ImageView brandImageView;
-    @FXML
-    private ImageView lockView;
+    @FXML//tiny right logo
+    private ImageView agreeView;
 
     @Override //image initialization
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        File brandingFile = new File("Images/bg.jpg"); //left image
+        File brandingFile = new File("Images/sideFile.PNG"); //left image
         Image brandingImage = new Image(brandingFile.toURI().toString());
         brandImageView.setImage(brandingImage);
 
-        File lockFile = new File("Images/lock.png"); //lock image
-        Image lockImage = new Image(lockFile.toURI().toString());
-        lockView.setImage(lockImage);
+        File lockFile = new File("Images/agree.png"); //agree image
+        Image agree = new Image(lockFile.toURI().toString());
+        agreeView.setImage(agree);
     }
 
 
@@ -44,14 +45,16 @@ public class LoginController implements Initializable {
 
     public void loginButtonOnAction (ActionEvent event){
         //make sure username and pass isnt blank
-        if(usernameText.getText().isBlank() == false && passwordText.getText().isBlank()==false){
+        if(usernameText.getText().isBlank() == true && phoneNumber.getText().isBlank() == true){
             loginMessageLabel.setText("Please try again!");
-            //validate llogin should be instead of the please try again
+            //validate login should be instead of the please try again
             //when we do the databases we will remove it
             //validateLogin();
+        }else if(usernameText.getText().isBlank() == false && phoneNumber.getText().isEmpty() == true){
+            loginMessageLabel.setText("Please try again!");
         }
         else{
-            loginMessageLabel.setText("Please enter a username and a password!");
+            loginMessageLabel.setText("Welcome, Happy to help you!");
         }
     }
 
@@ -63,6 +66,8 @@ public class LoginController implements Initializable {
        stage.close();
     }
     public  void validateLogin(){}
+
+
 
 
 
