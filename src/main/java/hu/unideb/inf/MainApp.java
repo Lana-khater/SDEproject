@@ -17,7 +17,7 @@ public class MainApp extends Application {
 
        /* stage.setTitle("SDE LOGIN");*/
         stage.initStyle(StageStyle.UNDECORATED); //no window outline
-        stage.setScene(new Scene(root, 550,400)); //window size
+        stage.setScene(new Scene(root, 550,405)); //window size
 
       /*  Scene.getStylesheets().add("/styles/Styles.css");*/ //put it in when we start CSS
 
