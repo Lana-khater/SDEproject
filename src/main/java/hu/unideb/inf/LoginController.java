@@ -1,19 +1,22 @@
 package hu.unideb.inf;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import DataBase.InsertUpdateDelete;
+import DataBase.Select;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import java.io.File;
 import java.net.URL;
-import javafx.scene.control.Label;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.net.URL;
+import DataBase.InsertUpdateDelete;
+
+import javax.swing.*;
 
 public class LoginController implements Initializable {
 
@@ -26,6 +29,11 @@ public class LoginController implements Initializable {
     private ImageView brandImageView;
     @FXML//tiny right logo
     private ImageView agreeView;
+    @FXML//tiny right logo
+    private RadioButton rbNew;
+    @FXML//tiny right logo
+    private RadioButton rbExist;
+
 
     @Override //image initialization
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -44,17 +52,34 @@ public class LoginController implements Initializable {
     private Label loginMessageLabel;
 
     public void loginButtonOnAction (ActionEvent event){
-        //make sure username and pass isnt blank
-        if(usernameText.getText().isBlank() == true && phoneNumber.getText().isBlank() == true){
-            loginMessageLabel.setText("Please try again!");
-            //validate login should be instead of the please try again
-            //when we do the databases we will remove it
-            //validateLogin();
-        }else if(usernameText.getText().isBlank() == false && phoneNumber.getText().isEmpty() == true){
-            loginMessageLabel.setText("Please try again!");
-        }
-        else{
-            loginMessageLabel.setText("Welcome, Happy to help you!");
+        String name = usernameText.getText();
+        String phone = phoneNumber.getText();
+
+        //make sure username and pass isn't blank
+        if(name.equals("") || phone.equals("")){
+            loginMessageLabel.setText("All fields are required!");
+
+        }else if (name.equals("Zen4") && phone.equals("1234")){
+            //this has to be changed after setting up admin setting
+            JOptionPane.showMessageDialog(null, "Welcome admin!");
+        }else{
+            if(rbNew.isSelected()){
+            String Query;
+            Query = "insert into users values('"+name+"','"+phone+"')";
+            InsertUpdateDelete.setData(Query,"Welcome new customer!");
+            }else if (rbExist.isSelected()){
+                ResultSet rs = Select.getData("SELECT* FROM users where name='"+name+"'and phone='"+phone+"'");
+                try {
+                    if (rs.next()) {
+                        //this has to be changed after we add new UI for actual project
+                        JOptionPane.showMessageDialog(null, "Welcome existing user!");
+                    }
+                }catch (Exception e){
+                        JOptionPane.showMessageDialog(null, e);
+                }
+            }else{
+                loginMessageLabel.setText("All fields are required!");
+            }
         }
     }
 

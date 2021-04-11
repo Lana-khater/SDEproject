@@ -1,5 +1,5 @@
 module JavaFX11 {
-
+    requires java.desktop;
     requires javafx.graphics;
     requires javafx.fxml;
     requires javafx.controls;
