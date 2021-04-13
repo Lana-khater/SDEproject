@@ -24,14 +24,10 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="e9070b8d-6db3-41db-95aa-88d2e14394a9">
-        <schema name="laundry" object-types="table, view, index, procedure, column, constraint, function, dataset trigger" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="e9070b8d-6db3-41db-95aa-88d2e14394a9">
+    <connection id="67d8b40f-e9e9-467d-aa03-81a53f23d391">
       <console name="Connection" type="STANDARD" schema="mysql" session="Main" />
     </connection>
   </component>
@@ -39,7 +35,7 @@
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="e9070b8d-6db3-41db-95aa-88d2e14394a9" />
+    <connection id="67d8b40f-e9e9-467d-aa03-81a53f23d391" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -67,7 +63,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="e9070b8d-6db3-41db-95aa-88d2e14394a9" active="true">
+      <connection id="67d8b40f-e9e9-467d-aa03-81a53f23d391" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
