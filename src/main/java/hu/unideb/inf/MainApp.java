@@ -13,13 +13,17 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
 
-       /* stage.setTitle("SDE LOGIN");*/
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+
+        stage.setTitle("Welcome Here");
         stage.initStyle(StageStyle.UNDECORATED); //no window outline
         stage.setScene(new Scene(root, 550,405)); //window size
 
-      /*  Scene.getStylesheets().add("/styles/Styles.css");*/ //put it in when we start CSS
+        //Scene.getStylesheets().add("/styles/Styles.css");*/ //put it in when we start CSS
 
         stage.show();
 
@@ -27,6 +31,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
+
         launch(args);
     }
 

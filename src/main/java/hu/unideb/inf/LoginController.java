@@ -2,6 +2,9 @@ package hu.unideb.inf;
 
 import DataBase.InsertUpdateDelete;
 import DataBase.Select;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,8 +16,6 @@ import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import java.net.URL;
-import DataBase.InsertUpdateDelete;
 
 import javax.swing.*;
 
@@ -35,12 +36,17 @@ public class LoginController implements Initializable {
     private RadioButton rbExist;
 
 
+
+    public LoginController(URL resource) {
+
+    }
+
+
     @Override //image initialization
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File brandingFile = new File("Images/sideFile.PNG"); //left image
         Image brandingImage = new Image(brandingFile.toURI().toString());
         brandImageView.setImage(brandingImage);
-
         File lockFile = new File("Images/agree.png"); //agree image
         Image agree = new Image(lockFile.toURI().toString());
         agreeView.setImage(agree);
@@ -62,17 +68,53 @@ public class LoginController implements Initializable {
         }else if (name.equals("Zen4") && phone.equals("1234")){
             //this has to be changed after setting up admin setting
             JOptionPane.showMessageDialog(null, "Welcome admin!");
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WashOrDry.fxml"));
+
+                Parent root1 = (Parent) fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setTitle("Pick one");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            }catch(Exception e){
+                System.out.println("Cant load this page");
+            }
+
+
         }else{
             if(rbNew.isSelected()){
             String Query;
             Query = "insert into users values('"+name+"','"+phone+"')";
             InsertUpdateDelete.setData(Query,"Welcome new customer!");
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WashOrDry.fxml"));
+
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.setTitle("Pick one");
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                }catch(Exception e){
+                    System.out.println("Cant load this page");
+                }
             }else if (rbExist.isSelected()){
                 ResultSet rs = Select.getData("SELECT* FROM users where name='"+name+"'and phone='"+phone+"'");
                 try {
                     if (rs.next()) {
                         //this has to be changed after we add new UI for actual project
                         JOptionPane.showMessageDialog(null, "Welcome existing user!");
+                        try {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WashOrDry.fxml"));
+
+                            Parent root1 = (Parent) fxmlLoader.load();
+                            Stage stage = new Stage();
+                            stage.setTitle("Pick one");
+                            stage.setScene(new Scene(root1));
+                            stage.show();
+                        }catch(Exception e){
+                            System.out.println("Cant load this page");
+                        }
+
                     }
                 }catch (Exception e){
                         JOptionPane.showMessageDialog(null, e);
@@ -82,6 +124,8 @@ public class LoginController implements Initializable {
             }
         }
     }
+
+
 
 
     @FXML//if u click cancel the window closes
