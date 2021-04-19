@@ -13,14 +13,10 @@ import javafx.scene.image.ImageView;
 
 public class WashOrDry implements Initializable {
 
-    @FXML
-    private ImageView backgroundView;
-    @FXML
-    private Label label;
-    @FXML
-    private Button washingButton;
-    @FXML
-    private Button dryingButton;
+    @FXML private ImageView backgroundView;
+    @FXML private Label label;
+    @FXML private Button washingButton;
+    @FXML private Button dryingButton;
 
     public WashOrDry(ImageView backgroundView, Label label, Button washingButton, Button dryingButton) {
         this.backgroundView = backgroundView;
@@ -30,19 +26,20 @@ public class WashOrDry implements Initializable {
     }
 
 
+
+
     @FXML
-    public void washingButtonAction(ActionEvent event) {
+    void washingButtonAction(ActionEvent event) {
         if(washingButton.isPressed())
             label.setText("Proceeding with washing, $$");
     }
     @FXML
-    public void dryingButtonAction(ActionEvent event) {
+    void dryingButtonAction(ActionEvent event) {
         if(dryingButton.isPressed())
             label.setText("Proceeding with drying, $");
     }
 
-
-
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         File brandingFile = new File("images/allinOne.PNG");
         Image brandingImage = new Image(brandingFile.toURI().toString());
