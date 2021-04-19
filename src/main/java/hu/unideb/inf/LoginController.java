@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
@@ -21,25 +22,71 @@ import javax.swing.*;
 
 public class LoginController implements Initializable {
 
- //buttons, images, and message label
-    @FXML //username
-    private TextField usernameText;
-    @FXML //password
-    private TextField phoneNumber;
-    @FXML//left Picture
-    private ImageView brandImageView;
-    @FXML//tiny right logo
-    private ImageView agreeView;
-    @FXML//tiny right logo
-    private RadioButton rbNew;
-    @FXML//tiny right logo
-    private RadioButton rbExist;
+    @FXML private TextField usernameText;//username
+    @FXML private TextField phoneNumber;//password
+    @FXML private ImageView brandImageView;//left Picture
+    @FXML private ImageView agreeView;//tiny right logo
+    @FXML private RadioButton rbNew;//tiny right logo
+    @FXML private RadioButton rbExist;//tiny right logo
+    @FXML private Button NextButton;//to navigate to next page
+    @FXML private Label loginMessageLabel;//if you press login w' wrong pass it says try again
+    @FXML private Button cancelButton;//if u click cancel the window closes
+    @FXML private Stage stage;
+    @FXML private Parent scene;
 
 
+    @FXML
+    void loginButtonOnAction(ActionEvent event) {
+        String name = usernameText.getText();
+        String phone = phoneNumber.getText();
 
-    public LoginController(URL resource) {
-
+        //make sure username and pass isn't blank
+        if (name.equals("") || phone.equals("")) {
+            loginMessageLabel.setText("All fields are required!");
+        } else if (name.equals("Zen4") && phone.equals("1234")) {
+            //this has to be changed after setting up admin setting
+            JOptionPane.showMessageDialog(null, "Welcome admin!");
+        } else {
+            if (rbNew.isSelected()) {
+                String Query;
+                Query = "insert into users values('" + name + "','" + phone + "')";
+                //InsertUpdateDelete.setData(Query, "Welcome new customer!");
+                try {
+                    //this has to be changed after we add new UI for actual project
+                    JOptionPane.showMessageDialog(null, "Most welcomed new user!");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            } else if (rbExist.isSelected()) {
+                //ResultSet rs = Select.getData("SELECT* FROM users where name=' "+name+" '  'and phone='" + phone + "'");
+                try {
+                        //this has to be changed after we add new UI for actual project
+                        JOptionPane.showMessageDialog(null, "Welcome back, we missed you!");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            } else {
+                loginMessageLabel.setText("All fields are required!");
+            }
+        }
     }
+
+    @FXML
+    void cancelButtonOnAction(ActionEvent event) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
+
+
+    @FXML
+    void NextpageOnAction(ActionEvent event) throws IOException {
+       stage = (Stage) NextButton.getScene().getWindow();
+       scene = FXMLLoader.load(getClass().getResource("/fxml/washOrDry.fxml"));
+       stage.setScene(new Scene(scene));
+       stage.show();
+    }
+
+
 
 
     @Override //image initialization
@@ -51,104 +98,13 @@ public class LoginController implements Initializable {
         Image agree = new Image(lockFile.toURI().toString());
         agreeView.setImage(agree);
     }
-
-
-
-    @FXML //if you press login w' wrong pass it says try again
-    private Label loginMessageLabel;
-
-    public void loginButtonOnAction (ActionEvent event){
-        String name = usernameText.getText();
-        String phone = phoneNumber.getText();
-
-        //make sure username and pass isn't blank
-        if(name.equals("") || phone.equals("")){
-            loginMessageLabel.setText("All fields are required!");
-
-        }else if (name.equals("Zen4") && phone.equals("1234")){
-            //this has to be changed after setting up admin setting
-            JOptionPane.showMessageDialog(null, "Welcome admin!");
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WashOrDry.fxml"));
-
-                Parent root1 = (Parent) fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.setTitle("Pick one");
-                stage.setScene(new Scene(root1));
-                stage.show();
-            }catch(Exception e){
-                System.out.println("Cant load this page");
-            }
-
-
-        }else{
-            if(rbNew.isSelected()){
-            String Query;
-            Query = "insert into users values('"+name+"','"+phone+"')";
-            InsertUpdateDelete.setData(Query,"Welcome new customer!");
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WashOrDry.fxml"));
-
-                    Parent root1 = (Parent) fxmlLoader.load();
-                    Stage stage = new Stage();
-                    stage.setTitle("Pick one");
-                    stage.setScene(new Scene(root1));
-                    stage.show();
-                }catch(Exception e){
-                    System.out.println("Cant load this page");
-                }
-            }else if (rbExist.isSelected()){
-                ResultSet rs = Select.getData("SELECT* FROM users where name='"+name+"'and phone='"+phone+"'");
-                try {
-                    if (rs.next()) {
-                        //this has to be changed after we add new UI for actual project
-                        JOptionPane.showMessageDialog(null, "Welcome existing user!");
-                        try {
-                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WashOrDry.fxml"));
-
-                            Parent root1 = (Parent) fxmlLoader.load();
-                            Stage stage = new Stage();
-                            stage.setTitle("Pick one");
-                            stage.setScene(new Scene(root1));
-                            stage.show();
-                        }catch(Exception e){
-                            System.out.println("Cant load this page");
-                        }
-
-                    }
-                }catch (Exception e){
-                        JOptionPane.showMessageDialog(null, e);
-                }
-            }else{
-                loginMessageLabel.setText("All fields are required!");
-            }
-        }
-    }
-
-
-
-
-    @FXML//if u click cancel the window closes
-    private Button cancelButton;
-    public void cancelButtonOnAction(ActionEvent event){
-       Stage stage= (Stage) cancelButton.getScene().getWindow();
-       stage.close();
-    }
-    public  void validateLogin(){}
+}
 
 
 
 
 
 
-  /*  @FXML
-    private Label label;
-    
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");*/
-    }
 
 
 
