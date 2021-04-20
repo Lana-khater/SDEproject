@@ -1,13 +1,16 @@
 package hu.unideb.inf;
-
+import javafx.application.Application;
 import DataBase.InsertUpdateDelete;
 import DataBase.Select;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import java.io.File;
@@ -17,8 +20,10 @@ import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
+import javafx.scene.control.Button;
 import javax.swing.*;
+
+import static javafx.fxml.FXMLLoader.load;
 
 public class LoginController implements Initializable {
 
@@ -31,8 +36,10 @@ public class LoginController implements Initializable {
     @FXML private Button NextButton;//to navigate to next page
     @FXML private Label loginMessageLabel;//if you press login w' wrong pass it says try again
     @FXML private Button cancelButton;//if u click cancel the window closes
-    @FXML private Stage stage;
-    @FXML private Parent scene;
+
+   //@FXML private Parent scene;
+    @FXML private AnchorPane rootPane;
+
 
 
     @FXML
@@ -72,23 +79,37 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    void cancelButtonOnAction(ActionEvent event) {
+    public void cancelButtonOnAction(ActionEvent event) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
+   private Stage stage;
+    private Scene scene;
+    private  Parent root;
 
-    @FXML
-    void NextpageOnAction(ActionEvent event) throws IOException {
-       stage = (Stage) NextButton.getScene().getWindow();
-       scene = FXMLLoader.load(getClass().getResource("/fxml/washOrDry.fxml"));
-       stage.setScene(new Scene(scene));
-       stage.show();
-    }
+  public void NextButton (ActionEvent event) throws IOException {
+     Parent root = FXMLLoader.load(getClass().getResource("/fxml/washOrDry.fxml"));
+    stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+    scene= new Scene(root);
+    stage.setScene(scene);
+    stage.show(); }
 
+  //swtich to scene 2
+   public void LastpageOnAction (ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene= new Scene(root);
+        stage.setScene(scene);
+        stage.show();}
 
+    /*AnchorPane pane = FXMLLoader.load(getClass().getResource("/fxml/washOrDry.fxml"));
+          rootPane.getChildren().setAll(pane); //didnt work
 
-
+       /*  stage = (Stage) NextButton.getScene().getWindow();
+         scene = FXMLLoader.load(getClass().getResource("/fxml/washOrDry.fxml"));
+         stage.setScene(new Scene(scene));
+         stage.show();}*/
     @Override //image initialization
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File brandingFile = new File("Images/sideFile.PNG"); //left image
@@ -97,8 +118,8 @@ public class LoginController implements Initializable {
         File lockFile = new File("Images/agree.png"); //agree image
         Image agree = new Image(lockFile.toURI().toString());
         agreeView.setImage(agree);
-    }
-}
+    }}
+
 
 
 
