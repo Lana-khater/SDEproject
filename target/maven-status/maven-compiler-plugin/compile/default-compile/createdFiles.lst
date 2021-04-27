@@ -1,7 +1,0 @@
-DataBase\InsertUpdateDelete.class
-DataBase\ConnectionProvider.class
-module-info.class
-hu\unideb\inf\MainApp.class
-hu\unideb\inf\LoginController.class
-DataBase\Select.class
-DataBase\Tables.class
