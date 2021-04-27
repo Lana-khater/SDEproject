@@ -16,39 +16,45 @@ public class WandP implements Initializable{
     @FXML private Label sixKG;
     @FXML private Label elevenKG;
     @FXML private Label sixteenKG;
-    @FXML private CheckBox oneHUF;
-    @FXML private CheckBox twoHUF;
-    @FXML private CheckBox threeHUF;
+    @FXML private CheckBox one;
+    @FXML private CheckBox two;
+    @FXML private CheckBox three;
     @FXML private ImageView whitetee;
 
 
 @FXML
-public void one(ActionEvent event){
-if(oneHUF.isSelected()){
-   oneHUF.setText("1500 FORINTS!");
+public void oneOnAction(ActionEvent event){
+if(one.isSelected()){
+   one.setText("1500 FORINTS!");
+   two.setSelected(false); //makes the other checkboxes not ticked
+   three.setSelected(false);
 }
 }
 @FXML
-public void two(ActionEvent event){
-    if(twoHUF.isSelected()){
-        twoHUF.setText("2500 FORINTS!");
+public void twoOnAction(ActionEvent event){
+    if(two.isSelected()){
+        two.setText("2500 FORINTS!");
+        one.setSelected(false);
+        three.setSelected(false);
         }}
 
 
     @FXML
-    public void three (ActionEvent event){
-        if(threeHUF.isSelected()){
-            threeHUF.setText("3000 FORINTS!"); }
+    public void threeOnAction(ActionEvent event){
+        if(three.isSelected()){
+            three.setText("3000 FORINTS!");
+        one.setSelected(false);
+        two.setSelected(false );}
     }
 
 
 
-    @Override
+  /*  @Override
     public void initialize(URL url, ResourceBundle rb) {
         File brandingFile = new File("images/wandp1.jpg");
         Image WashImage = new Image(brandingFile.toURI().toString());
         whitetee.setImage(WashImage);
-        //cehck this
+        //cehck this */
 
 
 
