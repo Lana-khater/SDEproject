@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #0492C2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainANDcontrollers.Admin">
+   <children>
+      <Label layoutX="150.0" layoutY="12.0" text="Welcome Admin !">
+         <font>
+            <Font name="Algerian" size="48.0" />
+         </font>
+      </Label>
+      <Button fx:id="exit" layoutX="323.0" layoutY="563.0" mnemonicParsing="false" onAction="#exitButtonOnAction" text="Exit" />
+      <TableView fx:id="AdminTable" editable="true" layoutX="50.0" layoutY="106.0" onMouseClicked="#statusChange" prefHeight="450.0" prefWidth="600.0" style="-fx-background-position: center;">
+        <columns>
+          <TableColumn fx:id="nameCol" prefWidth="75.0" style="-fx-alignment: center;" text="Name" />
+          <TableColumn fx:id="phoneCol" prefWidth="75.0" style="-fx-alignment: center;" text="PhoneNumber" />
+            <TableColumn fx:id="statusCol" prefWidth="75.0" style="-fx-alignment: center;" text="Status" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Button fx:id="refresh" layoutX="313.0" layoutY="72.0" mnemonicParsing="false" onAction="#refreshTable" text="Refresh" />
+   </children>
+</AnchorPane>
