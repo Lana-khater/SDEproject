@@ -8,7 +8,7 @@ public class ConnectionProvider {
     public static Connection getCon(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/laundry","root","1234");
+            Connection con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/TrVPLGTbDS","TrVPLGTbDS","IQVjKFF4My");
             return con;
         }catch (Exception e){
             return null;

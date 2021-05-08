@@ -1,8 +1,7 @@
 package DataBase;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.*;
 
 public class InsertUpdateDelete {
     public static void setData(String Query,String msg){

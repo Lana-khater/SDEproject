@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-border-color: white; -fx-background-radius: 10; -fx-background-color: #CDCDCD;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainANDcontrollers.WandP">
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-border-color: white; -fx-background-radius: 10; -fx-background-color: #CDCDCD;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainANDcontrollers.WandP">
     <children>
         <Label fx:id="chooseText" alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="50.0" prefHeight="54.0" prefWidth="597.0" text="Please choose your desired capacity of the washing machine and Pay!" textAlignment="CENTER" textFill="#fcf7f7">
             <font>

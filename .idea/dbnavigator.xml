@@ -24,18 +24,22 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="246b731e-a56b-48e4-85e9-b05423e99dc1">
+        <schema name="TrVPLGTbDS" object-types="index, function, procedure, column, view, table, constraint, dataset trigger" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="67d8b40f-e9e9-467d-aa03-81a53f23d391">
-      <console name="Connection" type="STANDARD" schema="mysql" session="Main" />
+    <connection id="246b731e-a56b-48e4-85e9-b05423e99dc1">
+      <console name="TrVPLGTbDS" type="STANDARD" schema="TrVPLGTbDS" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="67d8b40f-e9e9-467d-aa03-81a53f23d391" />
+    <connection id="246b731e-a56b-48e4-85e9-b05423e99dc1" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -63,9 +67,9 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="67d8b40f-e9e9-467d-aa03-81a53f23d391" active="true">
+      <connection id="246b731e-a56b-48e4-85e9-b05423e99dc1" active="true">
         <database>
-          <name value="Connection" />
+          <name value="TrVPLGTbDS" />
           <description value="" />
           <database-type value="MYSQL" />
           <config-type value="BASIC" />
@@ -74,12 +78,12 @@
           <driver-library value="" />
           <driver value="" />
           <url-type value="DATABASE" />
-          <host value="localhost" />
+          <host value="remotemysql.com" />
           <port value="3306" />
-          <database value="mysql" />
+          <database value="TrVPLGTbDS" />
           <type value="USER_PASSWORD" />
-          <user value="root" />
-          <deprecated-pwd value="MTIzNA==" />
+          <user value="TrVPLGTbDS" />
+          <deprecated-pwd value="SVFWaktGRjRNeQ==" />
         </database>
         <properties>
           <auto-commit value="false" />

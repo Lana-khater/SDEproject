@@ -1,7 +1,6 @@
 package DataBase;
 
-import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.*;
 import javax.swing.*;
 
 public class Tables {
@@ -12,8 +11,8 @@ public class Tables {
         try{
             con = ConnectionProvider.getCon();
             st = con.createStatement();
-            st.executeUpdate("create table users(name varchar(200), phone varchar(50))");
-            JOptionPane.showMessageDialog(null, "Table created successfully");
+            st.executeUpdate("create table users(name varchar(200), phone varchar(50), status varchar (20))");
+            JOptionPane.showMessageDialog(null, "Table Created Successfully");
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, e);

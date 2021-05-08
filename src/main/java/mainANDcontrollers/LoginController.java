@@ -1,4 +1,5 @@
 package mainANDcontrollers;
+
 import javafx.application.Application;
 import DataBase.InsertUpdateDelete;
 import DataBase.Select;
@@ -16,7 +17,7 @@ import javafx.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +25,7 @@ import javafx.scene.control.Button;
 import javax.swing.*;
 
 import static javafx.fxml.FXMLLoader.load;
+import static javafx.fxml.FXMLLoader.setDefaultClassLoader;
 
 public class LoginController implements Initializable {
 
@@ -42,37 +44,54 @@ public class LoginController implements Initializable {
 
 
     @FXML
-    void loginButtonOnAction(ActionEvent event) {
+    void loginButtonOnAction(ActionEvent event) throws IOException {
+        int check=0;
         String name = usernameText.getText();
         String phone = phoneNumber.getText();
 
         //make sure username and pass isn't blank
         if (name.equals("") || phone.equals("")) {
+            check =1;
             loginMessageLabel.setText("All fields are required!");
-        } else if (name.equals("Zen4") && phone.equals("1234")) {
-            //this has to be changed after setting up admin setting
-            JOptionPane.showMessageDialog(null, "Welcome admin!");
+
         } else {
             if (rbNew.isSelected()) {
                 String Query;
-                Query = "insert into users values('" + name + "','" + phone + "')";
-                //InsertUpdateDelete.setData(Query, "Welcome new customer!");
-                try {
-                    //this has to be changed after we add new UI for actual project
-                    JOptionPane.showMessageDialog(null, "Most welcomed new user!");
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
-                }
+                Query = "insert into users values('" + name + "','" + phone + "', 'false')";
+                InsertUpdateDelete.setData(Query, "Welcome new customer!");
+
             } else if (rbExist.isSelected()) {
-                //ResultSet rs = Select.getData("SELECT* FROM users where name=' "+name+" '  'and phone='" + phone + "'");
-                try {
-                        //this has to be changed after we add new UI for actual project
-                        JOptionPane.showMessageDialog(null, "Welcome back, we missed you!");
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
+                if (name.equals("Zen4") && phone.equals("1234")) {
+                    check=1;
+                    Stage adminhome = (Stage) rbExist.getScene().getWindow();
+                    Parent root1 = FXMLLoader.load(getClass().getResource("/fxml/adminHome.fxml"));
+                    Scene scene = new Scene(root1);
+                    adminhome.setScene(scene);
+                    adminhome.setResizable(false);
+                    adminhome.setTitle("Welcome admin");
+                    adminhome.show();
+                    JOptionPane.showMessageDialog(null, "Welcome admin!");
                 }
-            } else {
-                loginMessageLabel.setText("All fields are required!");
+                else {
+                    ResultSet rs=Select.getData("select *from users where name= '"+name+"' and phone='"+phone+"'");
+                    try
+                    {
+                        if(rs.next()){
+                            check=1;
+                            if (rs.getString(3).equals("true")){
+                                NextpageOnAction(event);
+                            }
+                            else
+                                JOptionPane.showMessageDialog(null, "Wait for Admin Approval");
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        JOptionPane.showMessageDialog(null,e);
+                    }
+                }
+                if (check==0)
+                    JOptionPane.showMessageDialog(null, "Incorrect Name or Phone!");
             }
         }
     }
@@ -85,14 +104,22 @@ public class LoginController implements Initializable {
 
   //swtich to scene 2
   public void NextpageOnAction(ActionEvent event) throws IOException {
-      //Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-      Stage washordry = (Stage) NextButton.getScene().getWindow();
-      Parent root1 = FXMLLoader.load(getClass().getResource("/fxml/washOrDry.fxml"));
-      Scene scene = new Scene(root1);
-      washordry.setScene(scene);
-      washordry.setResizable(false);
-      washordry.setTitle("Pick One");
-      washordry.show();
+      int check=0;
+      String name = usernameText.getText();
+      String phone = phoneNumber.getText();
+      if (name.equals("") || phone.equals("")) {
+          check = 1;
+          JOptionPane.showMessageDialog(null,"Login First!");
+      } else {
+         // Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+          Stage washordry = (Stage) NextButton.getScene().getWindow();
+          Parent root1 = FXMLLoader.load(getClass().getResource("/fxml/washOrDry.fxml"));
+          Scene scene = new Scene(root1);
+          washordry.setScene(scene);
+          washordry.setResizable(false);
+          washordry.setTitle("Pick One");
+          washordry.show();
+      }
   }
 
 
