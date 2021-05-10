@@ -182,10 +182,10 @@ public class Washing implements Initializable {
     }
 
     public void colorchoose(ActionEvent actionEvent) {
-        WashDetails();
+
     }
 
     public void fabtricchoose(ActionEvent actionEvent) {
-        WashDetails();
+
     }
 }
