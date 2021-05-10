@@ -41,7 +41,7 @@ public class WashOrDry{
     @FXML
     void dryingButtonAction(ActionEvent event) throws IOException {
         Stage dryingANDprice = (Stage) dryingButton.getScene().getWindow();
-        Parent root5 = FXMLLoader.load(getClass().getResource("/fxml/dandFabric.fxml"));
+        Parent root5 = FXMLLoader.load(getClass().getResource("/fxml/Drying.fxml"));
         Scene scene = new Scene(root5);
         dryingANDprice.setScene(scene);
         dryingANDprice.setTitle("Fabric type");

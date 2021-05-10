@@ -132,7 +132,7 @@ public class Washing implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy.MM.dd");
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy");
         Calendar cal =Calendar.getInstance();
         Date.setText(myFormat.format(cal.getTime()));
 
