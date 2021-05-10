@@ -28,13 +28,13 @@ public class WashOrDry{
 
     @FXML
     void washingButtonAction(ActionEvent event) throws IOException {
-        Stage washingANDprice = (Stage) washingButton.getScene().getWindow();
-        Parent root2 = FXMLLoader.load(getClass().getResource("/fxml/wandP.fxml"));
+        Stage Washing = (Stage) washingButton.getScene().getWindow();
+        Parent root2 = FXMLLoader.load(getClass().getResource("/fxml/Washing.fxml"));
         Scene scene = new Scene(root2);
-        washingANDprice.setScene(scene);
-        washingANDprice.setTitle("Weight and pricing");
-        washingANDprice.setResizable(false);
-        washingANDprice.show();
+        Washing.setScene(scene);
+        Washing.setTitle("Washing");
+        Washing.setResizable(false);
+        Washing.show();
     }
 
 

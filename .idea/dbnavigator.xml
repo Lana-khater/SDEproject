@@ -26,7 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="246b731e-a56b-48e4-85e9-b05423e99dc1">
-        <schema name="TrVPLGTbDS" object-types="index, function, procedure, column, view, table, constraint, dataset trigger" />
+        <schema name="TrVPLGTbDS" object-types="index, table, view, function, column, constraint, dataset trigger, procedure" />
       </connection>
     </loaded-nodes>
   </component>

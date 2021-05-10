@@ -111,7 +111,7 @@ public class LoginController implements Initializable {
           check = 1;
           JOptionPane.showMessageDialog(null,"Login First!");
       } else {
-         // Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+          Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
           Stage washordry = (Stage) NextButton.getScene().getWindow();
           Parent root1 = FXMLLoader.load(getClass().getResource("/fxml/washOrDry.fxml"));
           Scene scene = new Scene(root1);

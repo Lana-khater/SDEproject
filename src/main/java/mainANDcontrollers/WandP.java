@@ -1,5 +1,5 @@
 
-package mainANDcontrollers;
+/*package mainANDcontrollers;
 
 import java.awt.*;
 import java.io.File;
@@ -76,4 +76,4 @@ public class WandP {
 
 
 }
-
+*/
