@@ -21,7 +21,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -36,14 +35,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import javax.security.auth.Refreshable;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.ComponentView;
 import javax.swing.text.View;
 import javax.xml.transform.Result;
-
 import javafx.scene.control.TableView;
 import static javafx.fxml.FXMLLoader.load;
 import static javafx.fxml.FXMLLoader.setDefaultClassLoader;
@@ -54,7 +51,7 @@ import static javax.swing.JComponent.*;
 
 
 
-public class Drying implements Initializable {
+public class Drying<TakeName> implements Initializable {
 
     @FXML private TextField price;
     @FXML private ComboBox itemweight;
@@ -65,13 +62,23 @@ public class Drying implements Initializable {
     @FXML private Button next;
     @FXML private TextField time;
     @FXML private TextField date;
-    String weight;
-    String type;
-    String temp;
+    @FXML private TextField name;
+    @FXML private TextField phone;
+
 
     ObservableList<String> weightlist = FXCollections.observableArrayList("11 Kg","16 Kg");
     ObservableList<String> fabrictypeList = FXCollections.observableArrayList("Cotton","Synthetics","Other (Delicates)");
     ObservableList<String> temperaturelist = FXCollections.observableArrayList("High Heat 60","Medium Heat 55","Low Gentil Heat 51");
+
+    String Name;
+    String Phone;
+    String Price;
+    String Time;
+    String Date;
+    String Weight;
+    String Type;
+    String Temp;
+
 
     public void backbutton(MouseEvent mouseEvent) throws IOException{
         Stage Backtomain = (Stage) back.getScene().getWindow();
@@ -80,9 +87,6 @@ public class Drying implements Initializable {
         Backtomain.setScene(scene);
         Backtomain.setResizable(false);
         Backtomain.show();
-    }
-
-    public void nextbutton(MouseEvent mouseEvent) {
     }
 
     public void exitbutton(MouseEvent mouseEvent) {
@@ -97,20 +101,18 @@ public class Drying implements Initializable {
         SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy");
         Calendar cal =Calendar.getInstance();
         date.setText(myFormat.format(cal.getTime()));
-
-
-
         itemweight.setItems(weightlist);
         fabrictype.setItems(fabrictypeList);
         temperature.setItems(temperaturelist);
 
 
+
     }
 
     public void weightselect(ActionEvent actionEvent) {
-        weight = itemweight.getSelectionModel().getSelectedItem().toString();
+        Weight = itemweight.getSelectionModel().getSelectedItem().toString();
         try{
-            ResultSet rs = Select.getData("select *from dry where weight ='"+weight+"' ");
+            ResultSet rs = Select.getData("select *from dry where weight ='"+Weight+"' ");
             while (rs.next()){
                 price.setText(rs.getString(4));
                 time.setText(rs.getString(5));
@@ -119,5 +121,36 @@ public class Drying implements Initializable {
         catch (Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+
+    public void nextbutton(MouseEvent mouseEvent) {
+        int id =1;
+        Name = name.getText();
+        Phone = phone.getText();
+        Price =price.getText();
+        Time = time.getText();
+        Date = date.getText();
+        Weight = itemweight.getSelectionModel().getSelectedItem().toString();
+        Type = fabrictype.getSelectionModel().getSelectedItem().toString();
+        Temp = temperature.getSelectionModel().getSelectedItem().toString();
+        String Query = "select max(id) from dryselect";
+
+
+        try {
+            ResultSet rs = Select.getData(Query);
+            while (rs.next())
+                id = rs.getInt(1);
+            id = id+1;
+
+            if (!price.equals("")){
+                Query = "insert into dryselect(id, name, phone, weight, type, temp, price, time,date) values ("+id+", '"+Name+"', '"+Phone+"', '"+Weight+"', '"+Type+"', '"+Temp+"', '"+Price+"', '"+Time+"', '"+Date+"' )";
+                InsertUpdateDelete.setData(Query, "Drying Select Successfully !");
+            }
+
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+
     }
 }

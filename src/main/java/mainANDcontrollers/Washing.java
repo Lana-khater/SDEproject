@@ -68,6 +68,18 @@ public class Washing implements Initializable {
     @FXML private Button GoBack;
     @FXML private TextField Price;
     @FXML private TextField Time;
+    @FXML private TextField Name;
+    @FXML private TextField Phone;
+    String weight;
+    String type;
+    String color;
+    String temp;
+    String soft;
+    String phoneNumber;
+    String userName;
+    String price;
+    String time;
+    String date;
 
     ObservableList<String> WeightList = FXCollections.observableArrayList("6 Kg","11 Kg","16 Kg");
     ObservableList<String> FabricTypeList = FXCollections.observableArrayList("Cotton","Synthetics","Other (Delicate)");
@@ -85,20 +97,13 @@ public class Washing implements Initializable {
         Backtomain.show();
     }
 
-    String weight;
-    String type;
-    String color;
-    String soft;
-    String temp;
-    String price;
-    String time;
+
 
     public void WashDetails(){
         WashingTemperature.getItems().clear();
         weight = (String) ItemWeight.getSelectionModel().getSelectedItem().toString();
         type = (String) FabricType.getSelectionModel().getSelectedItem().toString();
         color=(String) FabricColor.getSelectionModel().getSelectedItem().toString();
-
         try{
             ResultSet rs = Select.getData("select *from wash where weight='"+weight+"' and type='"+type+"' and color='"+color+"' ");
             while (rs.next()){
@@ -126,7 +131,36 @@ public class Washing implements Initializable {
   
 
     public void NextButton(MouseEvent mouseEvent) {
+        int id =1;
+        userName = Name.getText();
+        phoneNumber = Phone.getText();
+        weight = (String) ItemWeight.getSelectionModel().getSelectedItem().toString();
+        type = (String) FabricType.getSelectionModel().getSelectedItem().toString();
+        color=(String) FabricColor.getSelectionModel().getSelectedItem().toString();
+        temp = (String) WashingTemperature.getSelectionModel().getSelectedItem().toString();
+        soft = (String) Softeners.getSelectionModel().getSelectedItem().toString();
+        price = Price.getText();
+        time = Time.getText();
+        date = Date.getText();
+        String Query = "select max(id) from washselect";
+        try {
+            ResultSet rs = Select.getData(Query);
+            while (rs.next())
+                id = rs.getInt(1);
+            id = id+1;
+
+            if (!price.equals("")){
+                Query = "insert into washselect(id, name, phone, weight, type, color, temp, softener, price, time, date) values ("+id+", '"+userName+"', '"+phoneNumber+"', '"+weight+"', '"+type+"', '"+color+"', '"+temp+"','"+soft+"', '"+price+"', '"+time+"','"+date+"' )";
+                InsertUpdateDelete.setData(Query, "Washing Select Successfully !");
+            }
+
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+
     }
+
 
 
 
@@ -135,8 +169,6 @@ public class Washing implements Initializable {
         SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy");
         Calendar cal =Calendar.getInstance();
         Date.setText(myFormat.format(cal.getTime()));
-
-
 
         ItemWeight.setItems(WeightList);
         FabricType.setItems(FabricTypeList);

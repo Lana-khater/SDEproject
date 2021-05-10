@@ -1,17 +1,13 @@
 package mainANDcontrollers;
 
-import javafx.application.Application;
 import DataBase.InsertUpdateDelete;
 import DataBase.Select;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import java.io.File;
@@ -19,18 +15,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+import java.util.jar.Attributes;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javax.swing.*;
 
 import static javafx.fxml.FXMLLoader.load;
-import static javafx.fxml.FXMLLoader.setDefaultClassLoader;
 
 public class LoginController implements Initializable {
 
+
     @FXML private TextField usernameText;//username
-    @FXML private TextField phoneNumber;//password
+    @FXML private PasswordField phoneNumber;//password
     @FXML private ImageView brandImageView;//left Picture
     @FXML private ImageView agreeView;//tiny right logo
     @FXML private RadioButton rbNew;//tiny right logo
@@ -40,28 +38,25 @@ public class LoginController implements Initializable {
     @FXML private Button cancelButton;//if u click cancel the window closes
 
 
-
-
-
     @FXML
     void loginButtonOnAction(ActionEvent event) throws IOException {
         int check=0;
-        String name = usernameText.getText();
-        String phone = phoneNumber.getText();
+        String Name = usernameText.getText();
+        String Phone = phoneNumber.getText();
 
         //make sure username and pass isn't blank
-        if (name.equals("") || phone.equals("")) {
+        if (Name.equals("") || Phone.equals("")) {
             check =1;
             loginMessageLabel.setText("All fields are required!");
 
         } else {
             if (rbNew.isSelected()) {
                 String Query;
-                Query = "insert into users values('" + name + "','" + phone + "', 'false')";
+                Query = "insert into users values('" + Name + "','" + Phone + "', 'false')";
                 InsertUpdateDelete.setData(Query, "Welcome new customer!");
 
             } else if (rbExist.isSelected()) {
-                if (name.equals("Zen4") && phone.equals("1234")) {
+                if (Name.equals("Zen4") && Phone.equals("1234")) {
                     check=1;
                     Stage adminhome = (Stage) rbExist.getScene().getWindow();
                     Parent root1 = FXMLLoader.load(getClass().getResource("/fxml/adminHome.fxml"));
@@ -73,7 +68,7 @@ public class LoginController implements Initializable {
                     JOptionPane.showMessageDialog(null, "Welcome admin!");
                 }
                 else {
-                    ResultSet rs=Select.getData("select *from users where name= '"+name+"' and phone='"+phone+"'");
+                    ResultSet rs=Select.getData("select *from users where name= '"+Name+"' and phone='"+Phone+"'");
                     try
                     {
                         if(rs.next()){
@@ -120,6 +115,7 @@ public class LoginController implements Initializable {
           washordry.setTitle("Pick One");
           washordry.show();
       }
+
   }
 
 
@@ -132,7 +128,9 @@ public class LoginController implements Initializable {
         File lockFile = new File("Images/agree.png"); //agree image
         Image agree = new Image(lockFile.toURI().toString());
         agreeView.setImage(agree);
+
     }
+
 
 
 }
