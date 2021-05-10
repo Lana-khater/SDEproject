@@ -1,4 +1,0 @@
---patch-module
-JavaFX11=_
---add-reads
-JavaFX11=ALL-UNNAMED

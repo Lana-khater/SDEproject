@@ -5,6 +5,7 @@ module JavaFX11 {
     requires javafx.controls;
     requires java.sql;
    /* requires mysql.connector.java;*/ requires java.logging;
+    requires itextpdf;
 //when we start dealing with sql
     opens mainANDcontrollers;
 }
