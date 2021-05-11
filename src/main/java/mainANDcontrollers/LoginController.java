@@ -47,7 +47,8 @@ public class LoginController implements Initializable {
         //make sure username and pass isn't blank
         if (Name.equals("") || Phone.equals("")) {
             check =1;
-            loginMessageLabel.setText("All fields are required!");
+            JOptionPane.showMessageDialog(null,"All fields are required!");
+            //loginMessageLabel.setText("All fields are required!");
 
         } else {
             if (rbNew.isSelected()) {

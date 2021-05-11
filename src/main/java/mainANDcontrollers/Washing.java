@@ -162,7 +162,7 @@ public class Washing implements Initializable {
         catch (Exception e){
             JOptionPane.showMessageDialog(null,e);
         }
-        String path = "C:\\Users\\Haddad\\Desktop\\SDE Project\\LaundryApp\\PDF\\Washing\\";
+        String path = "C:\\Users\\Haddad\\Documents\\GitHub\\SDEproject\\PDF\\Washing";
         com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
         try {
             PdfWriter.getInstance(doc, new FileOutputStream(path+""+id+".pdf"));
@@ -196,10 +196,10 @@ public class Washing implements Initializable {
         int a = JOptionPane.showConfirmDialog(null,"Do You Want To Print Invoice","Select",JOptionPane.YES_NO_OPTION);
         if (a==0){
             try {
-                if ((new File("C:\\Users\\Haddad\\Desktop\\SDE Project\\LaundryApp\\PDF\\Washing\\"+id+".pdf")).exists()) {
+                if ((new File("C:\\Users\\Haddad\\Documents\\GitHub\\SDEproject\\PDF\\Washing"+id+".pdf")).exists()) {
                     Process p = Runtime
                             .getRuntime()
-                            .exec("rundll32 url.dll,FileProtocolHandler C:\\Users\\Haddad\\Desktop\\SDE Project\\LaundryApp\\PDF\\Washing\\"+id+".pdf");
+                            .exec("rundll32 url.dll,FileProtocolHandler C:\\Users\\Haddad\\Documents\\GitHub\\SDEproject\\PDF\\Washing"+id+".pdf");
                 }
                 else {
                     System.out.println("File is not Exists");
