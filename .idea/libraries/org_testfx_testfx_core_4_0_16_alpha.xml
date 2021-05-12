@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="org.testfx:testfx-core:4.0.16-alpha" type="repository">
+    <properties maven-id="org.testfx:testfx-core:4.0.16-alpha">
+      <exclude>
+        <dependency maven-id="org.hamcrest:hamcrest-core" />
+      </exclude>
+    </properties>
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/testfx/testfx-core/4.0.16-alpha/testfx-core-4.0.16-alpha.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/assertj/assertj-core/3.13.2/assertj-core-3.13.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
