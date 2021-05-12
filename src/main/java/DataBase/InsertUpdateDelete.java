@@ -1,5 +1,8 @@
 package DataBase;
 
+import javafx.scene.control.Alert;
+import mainANDcontrollers.ViewUtil;
+
 import javax.swing.*;
 import java.sql.*;
 
@@ -12,7 +15,7 @@ public class InsertUpdateDelete {
             st = con.createStatement();
             st.executeUpdate(Query);
             if(!msg.equals(""))
-                JOptionPane.showMessageDialog(null, msg);
+                ViewUtil.createAlert(Alert.AlertType.INFORMATION, msg).showAndWait();
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, e);

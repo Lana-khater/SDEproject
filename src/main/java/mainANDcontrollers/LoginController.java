@@ -22,6 +22,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javax.swing.*;
 
+import javax.swing.text.View;
+
 import static javafx.fxml.FXMLLoader.load;
 
 public class LoginController implements Initializable {
@@ -34,6 +36,7 @@ public class LoginController implements Initializable {
     @FXML private RadioButton rbNew;//tiny right logo
     @FXML private RadioButton rbExist;//tiny right logo
     @FXML private Button NextButton;//to navigate to next page
+    @FXML private Button loginButton;
     @FXML private Label loginMessageLabel;//if you press login w' wrong pass it says try again
     @FXML private Button cancelButton;//if u click cancel the window closes
 
@@ -47,6 +50,7 @@ public class LoginController implements Initializable {
         //make sure username and pass isn't blank
         if (Name.equals("") || Phone.equals("")) {
             check =1;
+            //ViewUtil.createAlert(Alert.AlertType.INFORMATION, "All fields are required!").showAndWait();
             loginMessageLabel.setText("All fields are required!");
 
         } else {
@@ -65,7 +69,7 @@ public class LoginController implements Initializable {
                     adminhome.setResizable(false);
                     adminhome.setTitle("Welcome admin");
                     adminhome.show();
-                    JOptionPane.showMessageDialog(null, "Welcome admin!");
+                    ViewUtil.createAlert(Alert.AlertType.INFORMATION, "Welcome admin!").showAndWait();
                 }
                 else {
                     ResultSet rs=Select.getData("select *from users where name= '"+Name+"' and phone='"+Phone+"'");
@@ -77,7 +81,8 @@ public class LoginController implements Initializable {
                                 NextpageOnAction(event);
                             }
                             else
-                                JOptionPane.showMessageDialog(null, "Wait for Admin Approval");
+                                ViewUtil.createAlert(Alert.AlertType.INFORMATION, "Wait for Admin Approval").showAndWait();
+
                         }
                     }
                     catch(Exception e)
@@ -86,7 +91,8 @@ public class LoginController implements Initializable {
                     }
                 }
                 if (check==0)
-                    JOptionPane.showMessageDialog(null, "Incorrect Name or Phone!");
+                    ViewUtil.createAlert(Alert.AlertType.INFORMATION, "Incorrect Name or Phone!").showAndWait();
+
             }
         }
     }
