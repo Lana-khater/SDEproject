@@ -51,7 +51,8 @@ public class LoginController implements Initializable {
         if (Name.equals("") || Phone.equals("")) {
             check =1;
             //ViewUtil.createAlert(Alert.AlertType.INFORMATION, "All fields are required!").showAndWait();
-            loginMessageLabel.setText("All fields are required!");
+            //loginMessageLabel.setText("All fields are required!");
+            JOptionPane.showMessageDialog(null,"All fields are required!");
 
         } else {
             if (rbNew.isSelected()) {
